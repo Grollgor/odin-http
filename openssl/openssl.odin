@@ -1,3 +1,4 @@
+#+feature global-context
 package openssl
 
 import "core:c"

@@ -1,3 +1,4 @@
+#+feature global-context
 package http
 
 import "base:runtime"

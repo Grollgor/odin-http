@@ -2,6 +2,7 @@ package http
 
 import "core:bytes"
 import "core:io"
+import "core:fmt"
 import "core:log"
 import "core:net"
 import "core:slice"
@@ -259,7 +260,7 @@ _response_write_heading :: proc(r: ^Response, content_length: int) {
 
 			assert(content_length < 1000000000000000000 && content_length > -1000000000000000000)
 			buf: [20]byte
-			ws(b, strconv.itoa(buf[:], content_length))
+			ws(b, strconv.write_int(buf[:], i64(content_length), 10))
 			ws(b, "\r\n")
 		}
 	}

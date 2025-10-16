@@ -1,8 +1,8 @@
-#+feature global-context
 package openssl
 
 import "core:c"
 import "core:c/libc"
+import "base:runtime"
 
 SHARED :: #config(OPENSSL_SHARED, false)
 
@@ -46,7 +46,8 @@ Version :: bit_field u32 {
 VERSION: Version
 
 @(private, init)
-version_check :: proc() {
+version_check :: proc "contextless" () {
+	context = runtime.default_context();
     VERSION = Version(OpenSSL_version_num())
     assert(VERSION.major == 3, "invalid OpenSSL library version, expected 3.x")
 }

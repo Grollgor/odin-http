@@ -1,4 +1,3 @@
-#+feature global-context
 package http
 
 import "base:runtime"
@@ -62,7 +61,7 @@ Default_Server_Opts := Server_Opts {
 }
 
 @(init, private)
-server_opts_init :: proc() {
+server_opts_init :: proc "contextless" () {
 	when ODIN_OS == .Linux || ODIN_OS == .Darwin {
 		Default_Server_Opts.thread_count = os.processor_core_count()
 	} else {
